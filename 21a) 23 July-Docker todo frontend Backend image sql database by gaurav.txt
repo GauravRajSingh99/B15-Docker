@@ -1,0 +1,225 @@
+AGENDA -  INSTALL DOCKER IN VM ------------------------
+
+1) Create rg - rg-dooker
+2) Create vm - vm-dooker
+  UN - azureuser
+  PW - Mommy7Daddy!
+a) Open powershell
+   ssh azureuser@20.126.139.18
+   UN - azureuser
+   PW - Mommy7Daddy!
+b) Install docker in vm using below url 
+   https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04
+c) Ctrl+c = exit
+d) docker version
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+AGENDA -  CREATE SQL DATABASE IN PORTAL-----------------
+
+3) Create sql database – sql-dooker
+a) Create new server - sql-dooker666
+b) SQL authentication
+UN - azureuser
+PW - Mommy7Daddy!
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+BACKEND IMAGE--------------
+
+4) Now putting backend code in our vm machine from below url
+   https://github.com/devopsinsiders/PyTodoBackendMonolith
+
+NOTE : Here Vm is acting like our own computer.
+
+a) In powershell do git clone of backend of todo app
+   git clone https://github.com/devopsinsiders/PyTodoBackendMonolith.git
+   ls
+b) cd PyTodoBackendMonolith/
+   ls
+c) Now we need a image from docker hub that has python and pip installed in it as per perquisites.So by installing python image our time got reduced since 
+   image already have pip and python installed in it.
+d) SEARCH – Docker reference
+   https://docs.docker.com/reference/dockerfile/
+e) cat Dockerfile - Just to check what is there inside the file 
+
+f) Now go to sql db and copy “connection string” 
+g) docker images - To check whether any docker image is there or not
+h) Now we will build docker image, so we will build docker in that folder only that contains docker files
+   docker build -t backendimage .
+i) docker images
+j) nano app.py - Update connection string by changing password
+   Driver={ODBC Driver 17 for SQL Server};Server=tcp:sql-dooker123.database.windows.net,1433;Database=sql-dooker;Uid=azureuser;Pwd={Mommy7Daddy!};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;
+K) We can make sql db online by clicking and changing time as below
+l) docker run -dp 8000:8000 backendimage
+   here dp – d means detach mode and p means port exposing
+   also we use i – interactive mode 
+   t – terminal 
+   p- port
+m) docker ps – to check running containers
+   docker ps –a – to see running + stopped containers both
+n) Open 8000 port on vm in network settings
+o) Now run on browser – public ip of vm:port
+   http://20.126.139.18:8000/
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+FRONTEND IMAGE ---------------------------
+
+1) Now putting frontend code in our vm machine from below url
+   https://github.com/devopsinsiders/ReactTodoUIMonolith
+
+a) In powershell do git clone of frontend of todo app in our vm
+   git clone https://github.com/devopsinsiders/ReactTodoUIMonolith.git
+   ls
+b) cd ReactTodoUIMonolith – Now changing into directory of frontend one 
+   ls
+c) Versions types
+i) major
+ii) minor
+iii) patch 
+
+d) touch Dockerfile - create file names as Dockerfile
+   nano Dockerfile and write content in it
+e) cd src/
+f) Update backend url in TodoApp.js file in field const API_BASE_URL = “Url of backend put here”
+g) docker build -t frontendimage . – to build our frontend image
+h) docker images
+i) docker run -dp 80:80 frontendimage
+j) docker ps
+k) Now open port 80 in vm for frontend
+l) Run ip of vm in browser
+m) Now suppose we have to stop the container 
+  docker stop id of that container 
+  docker stop 7560472d5c4d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
